@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+Sitemap: 
+https://andrecisp.cursos.celular.siteoficial-promoprodutos.com/sitemap.txt
+
+
+
+
+
+
+
