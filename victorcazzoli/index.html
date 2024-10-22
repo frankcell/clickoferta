@@ -22,7 +22,7 @@
             }
         }
 
-        .cookie-popup, .cookie-popupMob {
+       .cookie-popup, .cookie-popupMob {
             position: fixed;
             bottom: 50px;
             left: 50%;
@@ -34,8 +34,8 @@
             border-radius: 5px;
             z-index: 1000;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 90%;
-            width: auto;
+            width: 90%; /* Ajusta a largura para 100% em telas menores */
+            max-width: 50%; /* Garante que em telas maiores não ultrapasse 90% */
             height: auto;
             box-sizing: border-box;
             display: none;
@@ -43,6 +43,13 @@
 
         .cookie-popup {
             display: block;
+        }
+
+        @media (max-width: 600px) {
+            .cookie-popup, .cookie-popupMob {
+                max-width: 100%; /* Preenche 100% da largura da tela em dispositivos móveis */
+                padding: 15px; /* Diminui um pouco o padding para dispositivos móveis */
+            }
         }
 
         .btn {
