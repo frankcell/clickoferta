@@ -1,163 +1,286 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Promo Oferta — Grupo Exclusivo no WhatsApp</title>
-  <style>
-    :root {
-      --red: #EF3A2D;
-      --yellow: #FFA900;
-      --dark: #111;
-      --light: #fff;
-      --gray: #f7f7f7;
-      --radius: 8px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo Exclusivo de Promoções</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-color: #1c1c1c;
+            --accent-color: #4caf50;
+            --text-color: #f0f0f0;
+            --bg-color: #121212;
+            --secondary-bg: #1e1e1e;
+        }
 
-    /* RESET */
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: 'Inter', Arial, sans-serif; background:var(--dark); color:var(--light); line-height:1.5; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
 
-    /* LAYOUT */
-    header { padding:3rem 1rem 1.5rem; text-align:center; background:var(--red); }
-    header h1 { font-size:1.9rem; font-weight:800; margin-bottom:.5rem; }
-    header h1 span { animation:blink 1.2s infinite alternate; }
-    header p { font-size:1.1rem; font-weight:500; color:var(--yellow); }
+        body {
+            background-color: var(--bg-color);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-color);
+            overflow: hidden;
+        }
 
-    main { padding:2rem 1rem 6rem; max-width:600px; margin:auto; }
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
+            z-index: 2;
+        }
 
-    .benefits li { margin-bottom:.8rem; list-style:none; padding-left:2rem; position:relative; }
-    .benefits li::before {
-      content:"✓"; position:absolute; left:0; color:var(--yellow); font-weight:700;
-    }
+        .content-box {
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            padding: 2.5rem 2rem;
+            position: relative;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
-    .social-proof { background:var(--gray); color:#000; padding:1.2rem; border-radius:var(--radius); margin:2rem 0; text-align:center; }
-    .social-proof strong { color:var(--red); }
+        .message-container {
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .offers { margin:2rem 0; }
-    .offer-card {
-      background:#1b1b1b; border:1px solid #2a2a2a; border-radius:var(--radius);
-      padding:1rem; margin-bottom:1rem; display:flex; justify-content:space-between; align-items:center;
-      font-size:.95rem;
-    }
-    .offer-card span { font-weight:700; }
-    .offer-old { text-decoration:line-through; color:#bbb; font-weight:400; }
-    .offer-new { color:var(--yellow); }
-    
-    .cta { text-align:center; margin:2.5rem 0 1rem; }
-    .cta-btn {
-      display:inline-block; padding:1rem 2rem; font-size:1.15rem; font-weight:800;
-      background:linear-gradient(45deg, var(--yellow), var(--red));
-      color:var(--dark); border:none; border-radius:var(--radius); cursor:pointer;
-      animation:pulse 2s infinite;
-      text-decoration:none;
-    }
+        .text-display {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            letter-spacing: 0.3px;
+            line-height: 1.6;
+            text-align: center;
+            opacity: 0;
+        }
 
-    /* STICKY FOOTER CTA */
-    .sticky {
-      position:fixed; left:0; right:0; bottom:0; background:var(--yellow);
-      padding:.8rem 1rem; text-align:center; z-index:10; box-shadow:0 -4px 10px rgba(0,0,0,.3);
-    }
-    .sticky a { font-weight:800; color:var(--dark); text-decoration:none; }
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            overflow: hidden;
+            position: relative;
+        }
 
-    /* COUNTDOWN */
-    #countdown { font-weight:700; color:var(--yellow); }
+        .progress-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(to right, #25d366, #128c7e);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
 
-    /* ANIMATIONS */
-    @keyframes blink { from{opacity:.6;} to{opacity:1;} }
-    @keyframes pulse {
-      0% { transform:scale(1); }
-      50% { transform:scale(1.05); }
-      100% { transform:scale(1); }
-    }
+        /* Animated background effect */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.8;
+            background: linear-gradient(125deg, #121212 0%, #1c1c1c 100%);
+        }
 
-    /* MEDIA */
-    @media(min-width:700px){
-      header h1{font-size:2.4rem;}
-      .cta-btn{font-size:1.3rem;}
-    }
-  </style>
+        .bg-animation::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37,211,102,0.05) 0%, rgba(18,140,126,0.03) 30%, rgba(0,0,0,0) 70%);
+            animation: rotate 15s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Pulse effect for scan simulation */
+        .scan-effect {
+            width: 100px;
+            height: 100px;
+            background-color: rgba(76, 175, 80, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 2rem;
+        }
+
+        .scan-inner {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(76, 175, 80, 0.2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .scan-core {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(76, 175, 80, 0.3);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0.8);
+                opacity: 0.7;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .content-box {
+                padding: 2rem 1.5rem;
+            }
+            
+            .text-display {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<header>
-  <h1>🚨 <span>Últimas Vagas</span> no Grupo <br>mais Quente de Promoções!</h1>
-  <p>Contagem Regressiva: <span id="countdown">--:--</span></p>
-</header>
-
-<main>
-  <section class="intro">
-    <p style="font-size:1.15rem; text-align:center;">Receba <strong>cupons secretos</strong> e <strong>descontos de verdade</strong> direto no seu WhatsApp.<br>Sem enrolação. Sem spam.</p>
-  </section>
-
-  <section class="benefits">
-    <ul>
-      <li>Promoções verificadas diariamente</li>
-      <li>Cupons testados e funcionando</li>
-      <li>Produtos com frete grátis e avaliações reais</li>
-      <li>Vagas limitadas — grupo quase cheio!</li>
-    </ul>
-  </section>
-
-  <section class="social-proof">
-    <p><strong>+8.000 pessoas</strong> já economizam com a gente 💰</p>
-  </section>
-
-  <section class="offers">
-    <h2 style="margin-bottom:1rem; font-size:1.25rem;">Ofertas Reais de Hoje</h2>
-
-    <div class="offer-card">
-      <div>Fritadeira Elétrica</div>
-      <div>
-        <span class="offer-old">R$ 379</span> ➜ <span class="offer-new">R$ 179</span>
-      </div>
+    <div class="bg-animation"></div>
+    
+    <div class="container">
+        <div class="content-box">
+            <div class="scan-effect">
+                <div class="scan-inner">
+                    <div class="scan-core"></div>
+                </div>
+            </div>
+            
+            <div class="message-container">
+                <div id="message-1" class="text-display">Procurando vagas nos grupos de promoções...</div>
+                <div id="message-2" class="text-display hidden">Vaga encontrada! Redirecionando...</div>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
     </div>
 
-    <div class="offer-card">
-      <div>Echo Dot 5ª Geração</div>
-      <div>
-        <span class="offer-old">R$ 499</span> ➜ <span class="offer-new">R$ 279</span>
-      </div>
-    </div>
-
-    <div class="offer-card">
-      <div>Smartwatch Amazfit Bip 3</div>
-      <div>
-        <span class="offer-old">R$ 299</span> ➜ <span class="offer-new">R$ 169</span>
-      </div>
-    </div>
-  </section>
-
-  <div class="cta">
-    <a href="https://clickoferta.pro/grupodecupons/" class="cta-btn">👉 ENTRAR NO GRUPO AGORA</a>
-  </div>
-
-  <p style="font-size:.9rem; text-align:center; opacity:.8;">✅ É grátis.&nbsp;&nbsp;✅ Você pode sair quando quiser.&nbsp;&nbsp;✅ Sem spam.</p>
-</main>
-
-<!-- Sticky CTA for mobile -->
-<div class="sticky">
-  <a href="https://clickoferta.pro/grupodecupons/">🚀 ENTRAR AGORA &nbsp;|&nbsp; Vagas Limitadas</a>
-</div>
-
-<script>
-  // Countdown 20 min
-  const end = Date.now() + 20 * 60 * 1000;
-  const countdownEl = document.getElementById('countdown');
-
-  function updateCountdown(){
-    const diff = end - Date.now();
-    if(diff <= 0){
-      countdownEl.textContent = '00:00';
-      return;
-    }
-    const m = Math.floor(diff / 60000).toString().padStart(2,'0');
-    const s = Math.floor((diff % 60000) / 1000).toString().padStart(2,'0');
-    countdownEl.textContent = `${m}:${s}`;
-    requestAnimationFrame(updateCountdown);
-  }
-  updateCountdown();
-</script>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Elementos da interface
+            const message1 = document.getElementById('message-1');
+            const message2 = document.getElementById('message-2');
+            const progressFill = document.querySelector('.progress-fill');
+            const scanEffect = document.querySelector('.scan-effect');
+            
+            // URL do grupo WhatsApp - EDITE ESTA URL PARA O SEU GRUPO
+            const whatsappGroupUrl = 'https://chat.whatsapp.com/I8E0Der3s1rFfmaGUfJhdG';
+            
+            // Função para animar o progresso
+            const animateProgress = (from, to, duration, onComplete) => {
+                const start = performance.now();
+                
+                function update(time) {
+                    const elapsed = time - start;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easeProgress = 0.5 - Math.cos(progress * Math.PI) / 2; // Easing function
+                    const currentWidth = from + (to - from) * easeProgress;
+                    
+                    progressFill.style.width = ${currentWidth}%;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    } else {
+                        if (onComplete) onComplete();
+                    }
+                }
+                
+                requestAnimationFrame(update);
+            };
+            
+            // Sequência de animação
+            const runSequence = () => {
+                // Fade in primeira mensagem
+                message1.style.opacity = '1';
+                message1.classList.add('animate__animated', 'animate__fadeIn');
+                
+                // Animar barra de progresso de 0 a 60%
+                setTimeout(() => {
+                    animateProgress(0, 60, 2000, () => {
+                        // Pausar brevemente em 60%
+                        setTimeout(() => {
+                            // Continuar até 100%
+                            animateProgress(60, 100, 1000, () => {
+                                // Transição para a segunda mensagem
+                                message1.classList.remove('animate__fadeIn');
+                                message1.classList.add('animate__fadeOut');
+                                
+                                setTimeout(() => {
+                                    message1.classList.add('hidden');
+                                    message2.classList.remove('hidden');
+                                    message2.style.opacity = '1';
+                                    message2.classList.add('animate__animated', 'animate__fadeIn');
+                                    
+                                    // Remover o efeito de scan
+                                    scanEffect.classList.add('animate__animated', 'animate__fadeOut');
+                                    
+                                    // Redirecionar após a animação final
+                                    setTimeout(() => {
+                                        window.location.href = whatsappGroupUrl;
+                                    }, 2000);
+                                }, 500);
+                            });
+                        }, 800);
+                    });
+                }, 500);
+            };
+            
+            // Iniciar a sequência após carregar a página
+            setTimeout(runSequence, 300);
+        });
+    </script>
 </body>
 </html>
